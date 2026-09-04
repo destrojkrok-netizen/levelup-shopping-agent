@@ -202,3 +202,19 @@ def test_skills_index() -> None:
     backend = StubBackend()
     agent = fake_agent(backend)
     assert agent.skills.names == ["planning-goals", "search-discovery"]
+
+
+def test_eval_cases_parse_and_use_real_ids() -> None:
+    """Every eval file parses; ids are the catalog's GIDs or overlay placeholders on skipped cases."""
+    import json
+
+    for path in (PROJECT / "evals").glob("*.json"):
+        suite = json.loads(path.read_text())
+        assert suite["cases"], path.name
+        for case in suite["cases"]:
+            assert {"id", "priority", "difficulty", "turns", "expected"} <= case.keys(), case["id"]
+            text = json.dumps(case["expected"]) + json.dumps(case.get("state", {}))
+            for gid in re.findall(r"gid://shopify/\S+?(?=\")", text):
+                assert gid.startswith("gid://shopify/ProductVariant/"), (case["id"], gid)
+            if "<" in text:
+                assert "skip" in case, f"{case['id']} has a placeholder id but no skip reason"

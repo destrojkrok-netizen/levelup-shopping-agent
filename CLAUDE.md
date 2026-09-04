@@ -52,7 +52,11 @@ Scaffolded 2026-09-04 by `/scaffold-commerce-agent` with every interview default
   returned by `checkout_handoff` (hosted checkout; the model never sees the URL). No
   frontend yet: start from the reference's `examples/retail/storefront-web` over
   `examples/web-shared`.
-- **v1 index:** indexed `search-discovery`, `planning-goals`. Copied, unindexed in
+- **v1 index:** indexed `search-discovery` (wired 2026-09-04 via `/add-commerce-flow`:
+  `search_products` and `get_product_details` live on the Admin API, `present_products`
+  and `present_comparison` from the imported executor, `web_search` off; starter cases in
+  `evals/search-discovery.json`, four of nine runnable against the live catalog, the rest
+  skipped pending an eval-only overlay), `planning-goals`. Copied, unindexed in
   `skills/_staged/`: `purchase-research` (opens with `search_policies`, not wired),
   `customer-care` (needs policy content), `memory-personalization` (no real principal yet).
   `/add-commerce-flow` moves a flow back up.
