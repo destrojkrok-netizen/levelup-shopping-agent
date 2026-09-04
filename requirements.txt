@@ -1,0 +1,15 @@
+# The anthropics/commerce-agents packages this service imports, pinned to the commit the
+# scaffold was read from (CLAUDE.md, "Commerce agent decision record"). The three sibling
+# packages pin each other to the same dev version, so they resolve only when installed
+# together from this file.
+commerce-common[examples] @ git+https://github.com/anthropics/commerce-agents@fd4d59224ab96b43c6dc6888207c67b3bd5a24cf#subdirectory=commerce-common
+shopping-agent-core @ git+https://github.com/anthropics/commerce-agents@fd4d59224ab96b43c6dc6888207c67b3bd5a24cf#subdirectory=shopping-agent/core
+shopping-agent-runtime @ git+https://github.com/anthropics/commerce-agents@fd4d59224ab96b43c6dc6888207c67b3bd5a24cf#subdirectory=shopping-agent/runtime-messages-api
+
+anthropic==0.122.0
+fastapi==0.141.1
+httpx==0.28.1
+pydantic==2.13.4
+python-dotenv==1.2.2
+pyyaml==6.0.3
+uvicorn==0.52.3
